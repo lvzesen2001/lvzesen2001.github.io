@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://lvzesen2001.github.io</id>
+    <title>Gridea</title>
+    <updated>2022-07-22T12:23:42.046Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://lvzesen2001.github.io"/>
+    <link rel="self" href="https://lvzesen2001.github.io/atom.xml"/>
+    <subtitle>温故而知新</subtitle>
+    <logo>https://lvzesen2001.github.io/images/avatar.png</logo>
+    <icon>https://lvzesen2001.github.io/favicon.ico</icon>
+    <rights>All rights reserved 2022, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[ 微信原生小程序 （基于黑马程序员的视频）]]></title>
+        <id>https://lvzesen2001.github.io/post/wei-xin-yuan-sheng-xiao-cheng-xu-ji-yu-hei-ma-cheng-xu-yuan-de-shi-pin/</id>
+        <link href="https://lvzesen2001.github.io/post/wei-xin-yuan-sheng-xiao-cheng-xu-ji-yu-hei-ma-cheng-xu-yuan-de-shi-pin/">
+        </link>
+        <updated>2022-07-22T12:15:08.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="数据绑定">数据绑定</h2>
+<blockquote>
+<p>1、在data中定义数据</p>
+<p>2、在WXML中使用数据</p>
+</blockquote>
+<h3 id="通过mustache语法将数据绑定到页面">通过Mustache语法将数据绑定到页面</h3>
+<p>{{声明的数据}}，通过双括号的形式就可以将data中定义的数据拿出来</p>
+<p>Mustache语法除了可以绑定内容，还可以动态绑定属性，也可以进行三元运算。</p>
+<h2 id="事件绑定">事件绑定</h2>
+<h3 id="事件的定义">事件的定义</h3>
+<p>事件是渲染层到逻辑层的通讯方式，通过事件可以将用户在渲染层产生的行为，反馈到逻辑层进行业务的处理。</p>
+<p>每个页面都包含四个文件，分别为WXML、WXSS、JS、JSON四种类型的文件，分别对应web开发中的HTML、CSS、JS（JSON属于配置文件），我们可以将HTML、CSS看做是渲染层，通过这两个文件可以将我们代码渲染成为可以再屏幕上展示的页面，JS文件则帮助我们处理一些事件，将其看做是逻辑层</p>
+<h3 id="小程序中常用的事件">小程序中常用的事件</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">绑定方式</th>
+<th style="text-align:center">事件描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">tap</td>
+<td style="text-align:center">bindtap或bind:tap</td>
+<td style="text-align:center">手指触摸后马上离开，类似于HTML中的click事件</td>
+</tr>
+<tr>
+<td style="text-align:center">input</td>
+<td style="text-align:center">bindinput或bind:input</td>
+<td style="text-align:center">文本框的输入事件</td>
+</tr>
+<tr>
+<td style="text-align:center">change</td>
+<td style="text-align:center">bindchange或bind:change</td>
+<td style="text-align:center">状态改变时触发</td>
+</tr>
+</tbody>
+</table>
+<p>当事件回调触发的时候，会收到一个事件对象event，它的详细属性如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">type</td>
+<td style="text-align:center">String</td>
+<td style="text-align:center">事件类型（就是上表中的三种）</td>
+</tr>
+<tr>
+<td style="text-align:center">timeStamp</td>
+<td style="text-align:center">Integer</td>
+<td style="text-align:center">页面打开到触发事件所经过的毫秒数</td>
+</tr>
+<tr>
+<td style="text-align:center"><mark><strong>target</strong></mark></td>
+<td style="text-align:center"><mark><strong>Object</strong></mark></td>
+<td style="text-align:center"><mark><strong>触发事件的组件的一些属性值集合</strong></mark></td>
+</tr>
+<tr>
+<td style="text-align:center">currentTarget</td>
+<td style="text-align:center">Object</td>
+<td style="text-align:center">当前组件的一些属性值集合</td>
+</tr>
+<tr>
+<td style="text-align:center"><mark><strong>detail</strong></mark></td>
+<td style="text-align:center"><mark><strong>Object</strong></mark></td>
+<td style="text-align:center"><mark><strong>额外的信息</strong></mark></td>
+</tr>
+<tr>
+<td style="text-align:center">touches</td>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">触摸事件，当前停留在屏幕中的触摸点信息的数组</td>
+</tr>
+<tr>
+<td style="text-align:center">changedTouches</td>
+<td style="text-align:center">Array</td>
+<td style="text-align:center">触摸事件，当前变化的触摸点信息的数组</td>
+</tr>
+</tbody>
+</table>
+<h4 id="target和currenttarget的区别">target和currentTarget的区别</h4>
+<p>target是触发该事件的源头组件，而currentTarget则是当前事件所绑定的组件</p>
+<h4 id="bindtap的语法格式">bindtap的语法格式</h4>
+<p>1、通过bindtap为组件绑定tap触摸事件</p>
+<p>2、在页面的js文件中定义对应的事件处理函数，事件参数通过形参event（一般简写成e）来接收</p>
+<h4 id="在事件处理函数中为data中的数据赋值">在事件处理函数中为data中的数据赋值</h4>
+<p>通过调用this.setData(dataObject)方法，可以给页面data中的数据重新赋值，举例</p>
+<pre><code class="language-js">Page(
+	data:{
+    	info: 0
+    },
+    //修改data中的值
+    changeCount(){
+        this.setData({
+            info: this.data.info + 1
+        })
+    }
+)
+</code></pre>
+<h4 id="事件传参">事件传参</h4>
+<p>小程序中不能在绑定事件的同时为事件处理函数传递参数，因为小程序会把bindtap的属性值，统一当作事件名称来处理，小程序提供<mark>data-*<mark>自定义属性传参，其中</mark>*代表的是参数的名字</mark>，举例：</p>
+<pre><code class="language-html">&lt;button bindtap=&quot;btnHandler&quot; data-info=&quot;{{2}}&quot;&gt;
+    事件传参
+&lt;/button&gt;
+</code></pre>
+<p>在这里面，info会被解析成参数的名字，数值2会被解析成参数的值，传参的时候如果使用了Mustache语法，则2就会被解析成数字，但如果没有使用Mustache语法，则会被认为是String类型</p>
+<h4 id="实现文本框和data之间的数据同步">实现文本框和data之间的数据同步</h4>
+<blockquote>
+<ul>
+<li>定义数据</li>
+<li>渲染结构</li>
+<li>美化样式</li>
+<li>绑定input事件处理函数</li>
+</ul>
+</blockquote>
+<p>在事件处理函数中，通过<mark>event.target.dataset.参数名</mark>即可获取到具体参数的值</p>
+<p>通过<mark>bindinput</mark>可以为输入框绑定组件，在页面的js文件中定义事件处理函数，可以通过<mark>event.detail.value</mark>获取到文本框的最新值</p>
+<p>这里获取值可以发现前后是不一样的，可以再去看看上面对target和detail的说明帮助理解</p>
+<h2 id="条件渲染">条件渲染</h2>
+<h3 id="wxif">wx:if</h3>
+<p>小程序中使用==wx:if=&quot;{{condition}}&quot;==属性来判断是否需要渲染该代码块，也可以用wx:elif和wx:else配合wx:if来添加else判断</p>
+<p><mark>如果要一次性控制多个组件的展示和隐藏</mark>，可以使用==<block></block>==将多个组件包装起来，并在block标签上使用wx:if控制属性</p>
+<p><block>并不是一个组件，它只是一个包裹性的容器，不会在页面中做任何渲染，就仅仅起到将组件包裹起来，其本身在页面中并不会成为一个页面的块，与<view>所不同</p>
+<h3 id="hidden">hidden</h3>
+<p>小程序中也可以使用==hidden=&quot;{{condition}}&quot;==来控制组件元素的显示和隐藏</p>
+<h3 id="二者对比">二者对比</h3>
+<blockquote>
+<p>wx:if和hidden都是通过条件为true或false进行判断</p>
+</blockquote>
+<blockquote>
+<p>不同的是：</p>
+<ul>
+<li>wx:if以动态创建和移除元素的方式，控制元素的展示和隐藏</li>
+<li>hidden以切换样式的方式（display:none/block;），控制元素的展示和隐藏</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>使用建议：</p>
+<p>当需要频繁切换页面时，最好用hidden，减少页面元素的渲染；</p>
+<p>当控制条件比较复杂的时候，建议使用wx:if,搭配else使用；</p>
+</blockquote>
+<h2 id="列表渲染">列表渲染</h2>
+<h3 id="wxfor">wx:for</h3>
+<p>通过wx:for可以根据指定的数组，循环渲染重复的组件结构，举例：</p>
+<pre><code class="language-html">&lt;view wx:for=&quot;{{array}}&quot;&gt;
+    索引是{{index}},当前项是{{item}}
+&lt;/view&gt;
+</code></pre>
+<p>绑定数组也需要Mustache语法，当我们绑定数组之后，那么在当前的组件中，我们就可以利用index获取到当前的索引，item获取到当前的数组对象，这里也需要使用Mustache语法</p>
+<p>可以使用wx:for-index=&quot;索引名&quot;，wx:for-item=&quot;item名&quot;这两个属性来手动指定索引和当前项的变量名，举例：</p>
+<pre><code class="language-html">&lt;view wx:for=&quot;{{array}}&quot; wx:for-index=&quot;idx&quot; wx:for-item=&quot;itemName&quot;&gt;
+    索引是{{idx}},当前项是{{itemName}}
+&lt;/view&gt;
+</code></pre>
+<h3 id="wxkey">wx:key</h3>
+<p>类似于Vue列表渲染中的:key，小程序在实现列表渲染时，也建议为渲染出来的列表项目指定唯一的key值，从而提高渲染的效率，举例：</p>
+<pre><code class="language-html">data:{
+	userList:[
+		{id:1,name:'lzs'},
+		{id:2,name:'lzss'},
+		{id:3,name:'lzsss'}
+]
+}
+&lt;view wx:for=&quot;{{userList}}&quot; wx:key=&quot;id&quot;&gt;{{item.name}}&lt;/view&gt;
+</code></pre>
+<p>观察这个例子，发现，如果我们的数组里面存储的是对象，并且有id这一列的话，就可以指定key值为这一列，<mark>这时，要注意，在指定key时，不采用Mustache语法</mark>，但在取值时仍需要Mustache语法，且用==.==来去到对象中的具体值</p>
+<p>当没有id这一列时，我们也可以直接用index来作为我们的key值，只不过不推荐而已</p>
+<h3 id="为什么要有key这一属性加上它会对程序产生什么影响">为什么要有key这一属性，加上它会对程序产生什么影响？</h3>
+<p>小程序对Vue、React进行了大量的借鉴，所以在这里介绍一下Vue中key值得作用，来帮助我们理解</p>
+<p>Vue的官方文档中这样说道：</p>
+<blockquote>
+<p>当 Vue.js 用<mark>v-for</mark>正在更新已渲染过的元素列表时，它默认用“<mark>就地复用</mark>”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。</p>
+</blockquote>
+<p>假设Vue实例的<code>data</code>属性中有一个叫<code>numbers</code>的变量，它的值是<code>[1, 2, 3, 7, 8, 9]</code>：</p>
+<pre><code class="language-html">&lt;div v-for=&quot;num in numbers&quot;&gt;
+  {{num}}
+&lt;/div&gt;
+</code></pre>
+<p>这种情况下应当是渲染了6个<div>元素，其中的内容分别对应numbers中6个数字，此时如果numbers变成了[0, 1, 2, 3, 7, 8, 9]，即在数组头部插入了一个数字0，在没有key属性的情况下，渲染输出的更新步骤是这样的：</p>
+<p><mark>原先内容为1的<div>元素内容变成0，原先内容为2的<div>元素内容变成1，……以此类推，最后新增一个<div>元素，内容为9。</mark></p>
+<p>在这种情况下，Vue会通过改变原来元素的内容和增加/减少元素来完成这个改变，因为没有key属性，Vue无法跟踪每个节点，只能通过这样的方法来完成变更。</p>
+<p>让我们对以上代码进行一个小修改：</p>
+<pre><code class="language-html">&lt;div v-for=&quot;(num, index) in numbers&quot; :key=&quot;index&quot;&gt;
+  {{num}}
+&lt;/div&gt;
+</code></pre>
+<p>我这里用index变量，根据列表渲染的规则，它实际上对应了数组中每个元素的索引，这样做的好处是它可以使得每个元素的key值都不同，这是很重要的，如果我们要利用key属性的优点，必须保证同一父元素的所有子元素有不同的key属性。</p>
+<p>此时如果numbers从[1, 2, 3, 7, 8, 9]变成了[0, 1, 2, 3, 7, 8, 9]，渲染输出的更新步骤就变化了：</p>
+<p><mark>新增一个<div>元素，它的内容为0，并将它插入原先内容为1的元素之前。</mark></p>
+<p><mark>在</mark><mark>有了key属性之后，Vue会记住元素们的顺序</mark>==，并根据这个顺序在适当的位置插入/删除元素来完成更新，这种方法比没有key属性时的就地复用策略效率更高。==</p>
+<p>总体来说，当使用列表渲染时，<mark>永远添加key属性，这样可以提高列表渲染的效率</mark>，提高了页面的性能。</p>
+<h2 id="网络数据请求">网络数据请求</h2>
+<h3 id="两个限制">两个限制：</h3>
+<ul>
+<li>
+<p>只能请求HTTPS类型的接口</p>
+</li>
+<li>
+<p>必须将接口的域名添加到信任列表中（域名必须进行ICP备案）</p>
+</li>
+</ul>
+<h3 id="wxrequest">wx.request()</h3>
+<pre><code class="language-js">wx.request({
+    url:&quot;url&quot;,
+    data:{},
+    method:'GET/POST'
+    success: (res)=&gt;{
+    console.log(res);
+    //可以在这里将成功回调的数据进行setData
+}
+})
+</code></pre>
+<p>有一些数据需要在页面刚加载的时候，自动请求初始化一些数据，此时需要在页面的onLoad事件中调用获取数据的函数即可</p>
+<p>若真的没有HTTPS协议的接口，就手动关闭对HTTPS的校验</p>
+<figure data-type="image" tabindex="1"><img src="https://raw.githubusercontent.com/lvzesen2001/Images/master/img/202206031744779.png" alt="image-20220603174415893" loading="lazy"></figure>
+<h3 id="关于跨域和ajax的说明">关于跨域和Ajax的说明</h3>
+<p>跨域问题只存在基于浏览器的web开发中，由于小程序的宿主环境不是浏览器，而是微信客户端，所以小程序中不存在跨域问题</p>
+<p>Ajax技术的核心是依赖于浏览器中的XMLHttpRequest这个对象，由于小程序的宿主环境不是浏览器，而是微信客户端，所以在小程序中不能叫做发起“Ajax请求”，而是“发起网络数据请求”</p>
+<h2 id="全局数据共享">全局数据共享</h2>
+<p>小程序的解决办法在视频81-84</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://lvzesen2001.github.io/post/hello-gridea/</id>
+        <link href="https://lvzesen2001.github.io/post/hello-gridea/">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="https://gridea.dev/">Gridea 主页</a><br>
+<a href="https://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+</feed>
